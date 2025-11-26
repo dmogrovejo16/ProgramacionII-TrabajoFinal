@@ -1,0 +1,79 @@
+package Capitulo8.Ejercicio8_5.ModificacionTiempo;
+
+public class Tiempo {
+	int segundos;
+
+	 public Tiempo() {
+	  this(0,0,0);
+	 }
+
+	 public Tiempo(int h) {
+	  this(h,0,0);
+	 }
+
+	 public Tiempo(int h,int m) {
+	  this(h,m,0);
+	 }
+
+	 public Tiempo(int h,int m,int s) {
+	  establecerTiempo(h,m,s);
+	 }
+
+	 public Tiempo(Tiempo t) {
+	  this(t.obtenerHora(),t.obtenerMinuto(),t.obtenerSegundo());
+	 }
+
+	 public void establecerTiempo(int h,int m,int s) {
+	  establecerHora(h);
+	  establecerMinuto(m);
+	  establecerSegundo(s);
+	 }
+
+	 public void establecerHora(int h) {
+	  if(h>=0 && h<24) {
+	   int m=obtenerMinuto();
+	   int s=obtenerSegundo();
+	   segundos=h*3600+m*60+s;
+	  }
+	 }
+
+	 public void establecerMinuto(int m) {
+	  if(m>=0 && m<60) {
+	   int h=obtenerHora();
+	   int s=obtenerSegundo();
+	   segundos=h*3600+m*60+s;
+	  }
+	 }
+
+	 public void establecerSegundo(int s) {
+	  if(s>=0 && s<60) {
+	   int h=obtenerHora();
+	   int m=obtenerMinuto();
+	   segundos=h*3600+m*60+s;
+	  }
+	 }
+
+	 public int obtenerHora() {
+	  return segundos/3600;
+	 }
+
+	 public int obtenerMinuto() {
+	  return (segundos%3600)/60;
+	 }
+
+	 public int obtenerSegundo() {
+	  return segundos%60;
+	 }
+
+	 public String aStringUniversal() {
+	  return String.format("%02d:%02d:%02d",
+	   obtenerHora(),obtenerMinuto(),obtenerSegundo());
+	 }
+
+	 public String toString() {
+	  return String.format("%d:%02d:%02d %s",
+	   ((obtenerHora()==0||obtenerHora()==12)?12:obtenerHora()%12),
+	   obtenerMinuto(),obtenerSegundo(),
+	   (obtenerHora()<12?"AM":"PM"));
+	 }
+}
